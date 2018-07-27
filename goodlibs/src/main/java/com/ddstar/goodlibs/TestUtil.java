@@ -7,6 +7,10 @@ import android.util.Log;
  */
 public class TestUtil {
     public static void sayHello() {
-        Log.e("sayHello", "hello");
+        if (BuildConfig.libTest) {
+            Log.e("sayHello", "debug-hello");
+        } else {
+            Log.e("sayHello", "release-hello");
+        }
     }
 }
