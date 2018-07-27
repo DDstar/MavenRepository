@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'maven'
 android {
     compileSdkVersion 27
 
@@ -23,7 +23,19 @@ android {
     }
 
 }
-
+uploadArchives{
+    repositories.mavenDeployer{
+        //maven 路径
+        def libaarPath = file(getProperty('aar.maven'))
+        repository(url:"file://${libaarPath.absolutePath}")
+        pom.project{
+            version android.defaultConfig.versionName
+            groupId GROUPID
+            artifactId ARTIFACTID
+            description DESCRIPTION
+        }
+    }
+}
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
